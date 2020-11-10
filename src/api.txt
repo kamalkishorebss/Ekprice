@@ -1,0 +1,233 @@
+API List for now is below:
+
+
+Login:
+
+1)https://www.ekprice.com/api/login
+mallikarjun@ekprice.com
+
+2)Registration:
+
+3)https://www.ekprice.com/api/register?name=Ajay&email=vijay123@yopmail.com&phone_no=77110018&password=1234567&c_password=1234567&phone_code=+91
+
+
+Profile Update:
+
+4)https://www.ekprice.com/api/update-profile
+
+
+Forgot Password:
+
+5)https://www.ekprice.com/api/forgot/password?email=dev.manpreetkour@gmail.com
+
+
+Category Page services:
+
+6)https://www.ekprice.com/api/ALLCategories_and_subcategories
+
+7)https://www.ekprice.com/api/ALLSubcat_and_services
+
+8)https://www.ekprice.com/api/subcategoryservices/1
+
+
+Service Details page:
+
+9)https://www.ekprice.com/api/service_detail/23
+
+
+Recently added services :
+10)https://www.ekprice.com/api/recently_addedservices
+
+
+11)https://www.ekprice.com/api/orderlistbyuser/${id}/${status}
+
+
+Message
+12)https://www.ekprice.com/api/getmessage/70753
+
+
+getProfie
+13)https://www.ekprice.com/api/profile/${id}
+
+running_orders
+14)https://www.ekprice.com/api/profile/running_orders/userid
+
+
+customer_reviews
+15)https://www.ekprice.com/api/customer_reviews
+
+
+orderdetail
+16)https://www.ekprice.com/api/orderdetail/id
+
+/****sellerapi****/
+toggle api
+17)https://www.ekprice.com/api/switch-user/17495?type=seller
+
+get servirces by seller
+18)https://www.ekprice.com/api/getServiceBySaller
+sallerId:10778
+
+delete service
+18)https://www.ekprice.com/api/serveiceDelete
+Method : POST
+{
+	"service_id": "10000"
+}
+
+language api
+19)https://www.ekprice.com/api/languages
+
+country api
+20)https://www.ekprice.com/api/countries
+
+state api
+21)https://www.ekprice.com/api/state/
+
+city api
+22)https://www.ekprice.com/api/cities/${this.state.state_id}
+
+skills api
+23)https://www.ekprice.com/api/sellerskills
+
+24)https://www.ekprice.com/api/getAllOrders?sallerId=${id}&status=${status}
+
+25)https://www.ekprice.com/api/serviceEnableDisable?service_id=${id}&status=${status}`
+
+26)https://www.ekprice.com/api/freelencerDetails
+
+27)https://www.ekprice.com/api/sellerprofile/112
+
+28)https://www.ekprice.com/api/servicesincludes/89386
+
+  
+
+1. Categories & sub categories - you are showing number of people given the review. We need to show the number of reviews (there is only one parameters "reviews in api I am showing that one,If its wrong ask your api developers") 
+2. Images are still getting cut @Kamal  we need to fix this soon (I can do this only)
+3. Logo not changed on sign in & registration page (I asked you I need logo of type that I sent you)
+4. We need to connect FB & Google sign in(time taking tasks I will all that in the end)
+5. Keep space between interests & learn more. Keep lear more as a link.(done)
+6. I created a new user & it took me to home screen. But now when I go to account screen, it's asking me to login again(You need to login after registeration)
+7. Joined in - keep only month & year, hide the date(done)
+8. Hide 'support' link above Privacy policy (done)
+9. When an order status is changed on website the notification is not coming on mobile(pending api side)
+10. Why are the videos showing like this Kamal ? (done)
+11. Portfolios are not showing kamal
+12. Details page - reviews - client image not showing up (its api fault image are not null ,they are empty "https://www.ekprice.com/public/storage/user_profile/")
+13. Gallery opens only when I click on upload photo text and not the image above it (done)
+14. Change the message to   (done)
+"All the fields marked with * are required"
+15. A brief about yourself - add text ( atleast 200 characters) next to yourself in brackets. 
+16. Validate brief about yourself field for 200 characters
+If it's less add an error message " Please enter atleast 200 characters" pointing to that field
+17. Service title - keep text (min 60 chars & 80 chars max)
+Validate the field for minimum 60 and block user adding more than 80. This 80 and 60 includes even the " I will " text
+18.Service description - keep text (min 200 chars) and validate it
+19. I'm able to add service without selecting the service image also (done)
+20. Add service screen - output files & service includes are not mandatory. (ok)
+21. Standard package - Rs.500 should not be there. Freelancer can add any value
+Only for basic package it should be hard coded 
+22. After I added the service it redirects me to user account screen. Let's redirect to home screen.(done) 
+23. After adding service when I switch to seller, it's showing add service screen. We need to add the new screen which we discussed (its done you need to add new seller)
+24. Kamal increase the size of sub category images (done)
+25. Kamal wherever there is no image use default image. I think we discussed regarding this(done)
+In the above screenshot the language is also not coming(api fault)
+26. Keep the music only the users opens the app in a new session
+Let's not play it everytime(this is not possible make a video sound less)
+27. Login to a user account - then logout - then go to login screen. Now from this login screen I'm not able go to home screen again(done option added)
+28. When I switched to seller - went to my services - selected a service, it's showing blank for all services. (done)
+29. Whenver the user opens the app newly it should switch to user side. ( Switch button ) is to seller now
+This happens only when the app closes when I'm on seller side
+30. Seller account - when I select your earnings, the app closes(done)
+31. I searched for banner on home screen - I got the results - now when I select a service, it shows blank
+(you need to pass primary key i.e "id" here not service_id in this api "https://www.ekprice.com/api/search-seller-services?keyword=banner")
+33.This seller has money to withdraw but it's showing zero
+34. Kamal under video category, all the services are playing the same video
+35. Videos are not showing on service details page
+36. Joined in has been hard coded. For all users & sellers its showing the same
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

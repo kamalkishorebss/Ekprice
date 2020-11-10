@@ -1,0 +1,82 @@
+
+User View:
+
+Splash screen:
+
+- Video logo has to be there and the screen should be ideal for 3 seconds before it redirects the user to home page.
+
+Registration: [ API is used ] 
+
+- All the fields are mandatory and should be highlighted with asterisk
+- All the country codes should be rendered
+- When user clicks on just Register button without entering any details, all fields should show errors
+- Error messages has to be displayed appropriately
+- Once the user registers, take the user to home page
+- Once registered the user has to be saved in DB and user should be able to login from desktop view as well
+- Learn more link -> Redirect the user to desktop version of privacy policy page
+- Validate for Email id format and minimum & Maximum 10 digits for mobile number. Show as an inline text on both fields.
+- After registration, trigger an email which is done now.
+
+Login [ API is used ]
+
+- When user clicks on login without entering any details, all fields should show errors
+- Record the date and time of last logged and save in DB
+- Wrong email or password has to be validated
+- Social login should redirect to appropriate pages. Please let us know what details are required.
+- Once the user logs in through social login, redirect him to home page and save the account in DB
+- Learn more link -> Redirect the user to desktop version of privacy policy page
+- Forgot password -> Redirect to a screen where user can enter email id and click on submit. Display a message which says “ An email to reset your password has been sent to your id”
+
+User profile & update profile: [ API will be used ]
+
+- All the details of user will be coming through API
+- User should be able to update email, phone number, profile image
+- User should be able to change the password
+- User should be able to join as a freelancer from profile section
+- User should be able to see all his favourite services under Wishlist
+
+
+Home page: [ API used ]
+
+- Banners will be provided [ can this configured from admin and rendered on to app ? Please confirm ]
+- Recently added services [ API will be used ]
+- Current orders -> If there are running orders, show here else compress this section
+- Recently viewed services -> Only when the customer has viewed at least 1 service, show this section, else compress it
+- Testimonials -> Lets hardcode few and the rest can be pulled from google and play store
+- Chat icon & Contact seller -> When user clicks on this, take him to message screen with that particular seller opened
+- Wherever the seller image is shown, check if he is online or not. If online show a green mark on his image.
+
+
+Categories & Service listing page: [ API will be used ]
+
+- Once the user clicks on categories, show all the categories along with sub text and the count of services listed for that category
+- Icons can be picked up from the design
+- Once the user selects a category, take him to the screen where all the services of that category will be shown
+- When user clicks on sub category filter, show all the filters related to that particular category [ Sub categories will be coming from API ]
+
+
+Service Details page [ API will be used ]
+
+- Display all the details as shown on the design
+- Reviews and ratings will be coming from API
+- Packages [ basic, standard, premium] -> coming from API
+- Keep the payment button sticky while the screen starts scrolling
+- Other services by the seller [ API will be used ]
+- Recently viewed services [ On the fly ] 
+- Service images & portfolios [ API will be used ]
+- Seller details - View more link, show all the details of the seller on the popup
+- When user clicks on share icon on the top, show FB, Instagram, twitter & WhatsApp icons which will allow user to share on their timelines
+- When user click on the heart icon, save that service to his Wishlist which is under the profile.
+
+Order review page:
+
+- Get all the details as per the design
+- Integrate Payment gateways
+- During payment, redirect user to the payment gateway system
+- Once payment is done during redirection add a loading gif
+
+Order success page
+- Once the payment is successful, redirect the user to order success page
+- Update Order DB, Seller DB, User DB
+- Send emails to admin, seller, & customer.
+- On order success page, show the seller the timer which indicates in how many days will the order be completed.

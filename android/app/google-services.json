@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "87211480811",
+    "firebase_url": "https://ekprice-167607.firebaseio.com",
+    "project_id": "ekprice-167607",
+    "storage_bucket": "ekprice-167607.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:87211480811:android:eadc2c1c9490b7ca3190ae",
+        "android_client_info": {
+          "package_name": "com.ekprice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "87211480811-k7c891q1ujg4f7s2su08apv2tdub03tg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ekprice",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "87211480811-bsk6n2g4n74iq5pj1intgjaemr8e1v1k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ekprice",
+            "certificate_hash": "fac6195b8a4b751c5c4a26a387f0f4195d2cee73"
+          }
+        },
+        {
+          "client_id": "87211480811-9egkisnv8n0eunc385380k4lrvfsqvnd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBf4RdBVnzwYT6iJVRa6zqjjfY58cp2aJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "87211480811-9egkisnv8n0eunc385380k4lrvfsqvnd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

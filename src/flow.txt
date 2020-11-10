@@ -1,0 +1,179 @@
+API integrated for now is below:
+
+
+Login:
+
+1)https://www.ekprice.com/api/login
+mallikarjun@ekprice.com
+
+2)Registration:
+
+3)https://www.ekprice.com/api/register?name=Ajay&email=vijay123@yopmail.com&phone_no=77110018&password=1234567&c_password=1234567&phone_code=+91
+
+
+Profile Update:
+
+4)https://www.ekprice.com/api/update-profile
+
+
+Forgot Password:
+
+5)https://www.ekprice.com/api/forgot/password?email=dev.manpreetkour@gmail.com
+
+
+Category Page services:
+
+6)https://www.ekprice.com/api/ALLCategories_and_subcategories
+
+7)https://www.ekprice.com/api/ALLSubcat_and_services
+
+8)https://www.ekprice.com/api/subcategoryservices/1
+
+
+Service Details page:
+
+9)https://www.ekprice.com/api/service_detail/23
+
+
+Recently added services :
+10)https://www.ekprice.com/api/recently_addedservices
+
+
+11)https://www.ekprice.com/api/orderlistbyuser/${id}/${status}
+
+
+Message
+12)https://www.ekprice.com/api/getmessage/70753
+
+
+getProfie
+13)https://www.ekprice.com/api/profile/${id}
+
+running_orders
+14)https://www.ekprice.com/api/profile/running_orders/userid
+
+
+customer_reviews
+15)https://www.ekprice.com/api/customer_reviews
+
+
+orderdetail
+16)https://www.ekprice.com/api/orderdetail/id
+
+/****sellerapi****/
+toggle api
+17)https://www.ekprice.com/api/switch-user/17495?type=seller
+
+get servirces by seller
+18)https://www.ekprice.com/api/getServiceBySaller
+sallerId:10778
+
+delete service
+18)https://www.ekprice.com/api/serveiceDelete
+Method : POST
+{
+	"service_id": "10000"
+}
+
+language api
+19)https://www.ekprice.com/api/languages
+
+country api
+20)https://www.ekprice.com/api/countries
+
+state api
+21)https://www.ekprice.com/api/state/
+
+city api
+22)https://www.ekprice.com/api/cities/${this.state.state_id}
+
+skills api
+23)https://www.ekprice.com/api/sellerskills
+
+24)https://www.ekprice.com/api/getAllOrders?sallerId=${id}&status=${status}
+
+25)https://www.ekprice.com/api/serviceEnableDisable?service_id=${id}&status=${status}`
+
+26)https://www.ekprice.com/api/freelencerDetails
+
+27)https://www.ekprice.com/api/sellerprofile/112
+
+28)https://www.ekprice.com/api/getServiceBySeller/97552
+   console.log(`https://www.ekprice.com/api/getServiceBySeller/${id}`)
+
+30)add seller
+
+31)edit seller
+
+32) https://www.ekprice.com/api/freelencerDetails
+
+35)https://www.ekprice.com/api/editDeviceDetails
+
+29)https://www.ekprice.com/api/sellerWithdrwal
+
+34)https://www.ekprice.com/api/getSellerWithdrawals/22930
+
+36)https://www.ekprice.com/api/editSellerBankDetails
+
+37)https://www.ekprice.com/api/getSellerBankDetails/13680
+
+38)https://www.ekprice.com/api/sellerEarningDetails?user_id=19414&to=10-1-2019&from=11-2-2019
+
+39)Searching api
+
+40)get notificati
+https://www.ekprice.com/api/notifiations/17495/useron
+
+
+41)change order status
+https://www.ekprice.com/api/changeorderstatus/54?status=inprogress
+
+
+42)editSeller Profile_pic
+https://www.ekprice.com/api/editSellerProfilePic
+
+
+43)https://www.ekprice.com/api/check-first-service/47392
+
+44) filter
+https://www.ekprice.com/api/services-filter          With  Post method
+Parameters 
+cat_slug  => design   ( Pass here category slug )
+deliver_time => 2 days, 1 days
+language => 1,2
+outputfiles => 1,2
+
+45)https://www.ekprice.com/api/placeOrder
+
+46)https://www.ekprice.com/api/create-order
+
+47)https://www.ekprice.com/api/output-files
+
+48)https://www.ekprice.com/api/orders_reviews?user_id=57221&sellerid=97552&serviceid=81922&orderid=EKP310493666&quality_rating=5&delivery_rating=5&response_rating=5&ekprice_rating=5&order_comments=Good
+extra added screen
+
+1)add seller step1
+2)add seller step2
+3)about
+4)T&C
+5)policy
+6)edit seller form1
+7)edit seller from2
+8)search page
+9)Approval page
+10)Counrty page on filter
+11)language page on filter
+12)Forgot password
+13)Edit service1
+14)Edit service2
+
+
+
+{'\u20A8'}
+ 
+ home page banner (api)
+ added new section in home same as good better best(using api)
+ google captcha
+ change of register api
+ Need to design portfoilio section on service detail page and make functional
+ Add another section called FAQs. I'll share content tomorrow(Send please)
