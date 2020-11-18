@@ -14,7 +14,7 @@ import {
     Dimensions
 
 } from 'react-native'
-
+import FastImage from 'react-native-fast-image';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -23,10 +23,7 @@ import * as Progress from 'react-native-progress';
 import Modal from 'react-native-modal';
 import HTML from 'react-native-render-html';
 import Spinner from 'react-native-loading-spinner-overlay';
-import VideoPlayer from 'react-native-video-controls';
-import Video from 'react-native-video';
-import ImageLoad from 'react-native-image-placeholder'
-
+import { VLCPlayer, VlCPlayerView } from 'react-native-vlc-media-player';
 import {
     Header,
     BasicHeader,
@@ -46,6 +43,7 @@ import {
 } from '../../helpers'
 import moment from "moment";
 import AsyncStorage from '@react-native-community/async-storage';
+
 const mapDispatchToProps = (dispatch) => {
     return ({
         allActions: bindActionCreators(allActions, dispatch)
@@ -53,7 +51,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-    return {loginStatus : state.common.loginStatus}
+    return { loginStatus: state.common.loginStatus }
 }
 
 
@@ -75,8 +73,11 @@ class ServiceDetail extends React.Component {
             hvError: "Please wait ...",
             standardP: '',
             professionalP: '',
-            mainImage: "",
-            type: "jpg"
+            pkgName: 'Basic',
+            serviceImage: ''
+
+
+
 
         }
 
@@ -88,21 +89,21 @@ class ServiceDetail extends React.Component {
 
         this.setState({ spinner: true })
         this.props.allActions.getServiceDetail(this.props.navigation.getParam('serviceId')).then(res => {
+            console.log('service', res);
             this.setState({ spinner: false })
             if (res.status == true) {
-                console.log('sellers services', res);
-                const type = res.SERVICES.image.split(".").pop().toLowerCase();
+
                 this.setState({
                     service: res.SERVICES,
+                    serviceImage: res.SERVICES.image,
                     standardP: res.SERVICES.standard,
                     professionalP: res.SERVICES.professional,
                     sellerRating: res.SERVICES.seller_rating,
                     level: res.SERVICES.basic,
-                    sellerDetail: res.SERVICES.seller_data,
-                    mainImage: res.SERVICES.portfolio[0],
-                    type
+                    sellerDetail: res.SERVICES.seller_data
                 })
                 this.props.allActions.getServiceBySaller(res.SERVICES.seller_data.seller_id).then(res => {
+                    console.log('sellers services', res);
                     if (res.code == 200) {
                         this.setState({ services: res.data })
                     } else {
@@ -128,22 +129,19 @@ class ServiceDetail extends React.Component {
 
     changeTab(e) {
         if (e == 'Basic') {
-            this.setState({ isBasic: true, isPre: false, isSTD: false, level: this.state.service.basic })
+            this.setState({ pkgName: e, isBasic: true, isPre: false, isSTD: false, level: this.state.service.basic })
         }
         if (e == 'Standard') {
-            this.setState({ isBasic: false, isSTD: !this.state.isSTD, isPre: false, level: this.state.service.standard })
+            this.setState({ pkgName: e, isBasic: false, isSTD: !this.state.isSTD, isPre: false, level: this.state.service.standard })
         }
         if (e == 'Premium') {
-            this.setState({ isBasic: false, isPre: true, isSTD: false, level: this.state.service.professional })
+            this.setState({ pkgName: e, isBasic: false, isPre: true, isSTD: false, level: this.state.service.professional })
         }
 
     }
-    changeImage(img, type){
-        this.setState({
-            mainImage: img,
-            type: type
-        })
-        // this.state.service.image= img
+    changeImage(img) {
+        this.setState({ serviceImage: img })
+
     }
     renderFiles = (e) => {
         {
@@ -157,91 +155,104 @@ class ServiceDetail extends React.Component {
 
     prodceedToPay(level) {
 
-        if(this.props.loginStatus==''){
+        if (this.props.loginStatus == '') {
             this.props.navigation.navigate('Login')
-        }else{
-            if (level){
-                this.props.navigation.navigate("UserOrderReview", { 'orderReview': this.state.service, "package": level })
-            }  
+        } else {
+            if (level) {
+                this.props.navigation.navigate("UserOrderReview", { 'orderReview': this.state.service, "package": level, 'package_Name': this.state.pkgName })
+            }
         }
     }
 
-    videoError(error){
-        console.log('this.onErro', error)
-    }
-    onBuffer(e){
-        console.log('buffer', e)
-    }
+
+
+
 
     render() {
-        const { service, type } = this.state;
-        let image = this.state.mainImage;
-        console.log('service.image', image, type)
+        const { service } = this.state;
+        let image = this.state.service.image;
         return (
             <View style={styles.container}>
-                <BasicHeader {...this.props} title={'Detail'} />
+                <BasicHeader {...this.props} title={'Service Details'} />
                 <View style={styles.mainContent}>
                     <Spinner visible={this.state.spinner} color='red' overlayColor='rgba(255, 255, 255, .9)' />
                     <ScrollView style={styles.listContainer}>
-                        {type === "jpg" || type === "jpeg" || type === "png"  ?
+                        {this.state.serviceImage && this.state.serviceImage.substring(this.state.serviceImage.lastIndexOf(".")) == ".mp4" && this.state.serviceImage.substring(this.state.serviceImage.lastIndexOf(".")) == ".mp3" ?
                             <View style={styles.imageContainer}>
-                                <ImageLoad source={{ uri: image }} style={styles.backImage} resizeMode={'cover'} />
+                                {/* <VLCPlayer
+                                    ref={(ref) => (this.vlcPlayer = ref)}
+                                    style={{ width: '100%', height: 200 }}
+                                    videoAspectRatio="16:9"
+                                    onBuffering={this.onBuffer}
+                                    onError={this.videoError}
+                                    source={{
+                                        uri: this.state.serviceImage
+                                    }}
+                                /> */}
+                                <VideoPlayer
+                                    video={{ uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' }}
+                                    videoWidth={1600}
+                                    videoHeight={900}
+                                    thumbnail={{ uri: 'https://i.picsum.photos/id/866/1600/900.jpg' }}
+                                />
                             </View>
                             :
                             <View style={styles.imageContainer}>
-                                <VideoPlayer
-                                    paused={true}
-                                    source={{
-                                        uri: image
-                                    }}
-                                    ref={(ref) => {
-                                        this.player = ref
-                                    }}
-                                    disableFullscreen={true}
-                                    disableBack={true}
-                                    onBuffer={this.onBuffer}                // Callback when remote video is buffering
-                                    onError={this.videoError}
-                                    // resizeMode={'cover'}
-                                    style={{
-                                        width: '100%',
-                                        height: Dimensions.get('window').width * (9 / 16),
-                                    }}
-                                />
+                                <View style={{ width: '100%', height: '100%' }}>
+                                    <FastImage
+                                        style={styles.backImage}
+                                        source={{
+                                            uri: this.state.serviceImage,
+                                            headers: { Authorization: '9876543210' },
+                                            priority: FastImage.priority.high,
+                                        }}
+                                    />
+                                    {/* <Image source={{ uri: this.state.serviceImage }} style={styles.backImage} resizeMode={'cover'} /> */}
+                                </View>
                             </View>
-                            
                         }
-                        
+
                         <View style={styles.previewListContainer}>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                            {this.state.service.portfolio && this.state.service.portfolio.length>0 && 
-                            this.state.service.portfolio.map((item,index)=>{
-                                const splitUrl = item.split(".")
-                                const type = splitUrl.pop().toLowerCase()
-                                //jpg jpeg png 
-                                if(type === "jpg" || type === "jpeg" || type === "png"){
-                                    return(
-                                        <TouchableOpacity style={styles.previewImageItem}  key={`mini_image_${index}`} onPress={this.changeImage.bind(this,item, type)}>
-                                            <ImageLoad style={styles.previewImage} source={{uri : item}}/>
-                                        </TouchableOpacity>
-                                    )
-                                }else if(type === "mp4" || type === "mov" || type === "mov" || type === "wmv" || type === "flv" || type === "avi" || type === "webm" || type === "mkv"){
+                                {this.state.service.portfolio && this.state.service.portfolio.length > 0 && this.state.service.portfolio.map((item, index) => {
                                     return (
-                                        <TouchableOpacity style={styles.previewImageItem}  key={`mini_image_${index}`} onPress={this.changeImage.bind(this,item, type)} >
-                                            <ImageLoad style={styles.previewImage} source={require("../../assets/img/play-button.png")} resizeMode={"center"}/>
-                                        </TouchableOpacity>
+                                        <View>
+                                            {item ?
+                                                <TouchableOpacity style={styles.previewImageItem} key={`mini_image_${index}`} onPress={this.changeImage.bind(this, item)}>
+                                                    {item && item.substring(item.lastIndexOf(".")) == ".mp4" && item.substring(item.lastIndexOf(".")) == ".mp3" ?
+                                                        <VLCPlayer
+                                                            ref={(ref) => (this.vlcPlayer = ref)}
+                                                            style={{ width: '100%', height: 200 }}
+                                                            videoAspectRatio="16:9"
+                                                            onBuffering={this.onBuffer}
+                                                            onError={this.videoError}
+                                                            source={{
+                                                                uri: item
+                                                            }}
+                                                        />
+                                                        :
+                                                        <FastImage
+                                                            style={styles.previewImage}
+                                                            source={{
+                                                                uri: item,
+                                                                headers: { Authorization: '9876543210' },
+                                                                priority: FastImage.priority.high,
+                                                            }}
+                                                        />
+
+
+                                                    }
+                                                </TouchableOpacity>
+                                                :
+                                                null
+                                            }
+                                        </View>
                                     )
-                                }else{
-                                    return (
-                                        <TouchableOpacity style={styles.previewImageItem}  key={`mini_image_${index}`} onPress={this.changeImage.bind(this,item, type)}>
-                                            <ImageLoad style={styles.previewImage} source={require("../../assets/img/microphone.png")} />
-                                        </TouchableOpacity>
-                                    )
+                                })
                                 }
-                            })
-                            }
                             </ScrollView>
                         </View>
-                        
+
                         <View style={styles.bannerContent}>
                             {/* <Text style={styles.descText}>{image}</Text> */}
                             <Text style={styles.descText}>{this.state.service.title}</Text>
@@ -265,9 +276,14 @@ class ServiceDetail extends React.Component {
                                         <Image source={require('../../assets/img/userProfile.png')} style={{ width: 35, height: 35, borderRadius: 50 }} />
                                     }
                                 </View>
-                                <View style={{ width: '85%', alignItems: 'flex-start' }}>
+                                <View style={{ width: '60%', alignItems: 'flex-start' }}>
                                     <Text style={styles.ReviewNameText}>  {this.state.sellerDetail.display_name} <Text style={{ color: '#59BD5A', fontSize: 8, textTransform: 'capitalize' }}>({this.state.sellerDetail.level_type})</Text></Text>
                                     <Text style={styles.view} onPress={this.goToModal.bind(this)}>  View More</Text>
+                                </View>
+                                <View style={{ width: '25%', alignItems: 'flex-end' }}>
+                                    <TouchableOpacity style={styles.sellerBtn}>
+                                        <Text style={styles.sellerBtnText}>Chat Now</Text>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
 
@@ -279,7 +295,7 @@ class ServiceDetail extends React.Component {
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                 {this.state.service.skills && this.state.service.skills.length > 0 && this.state.service.skills.map((item, index) => {
                                     return (
-                                        <View style={{ width: normalize(100), marginLeft: normalize(5), paddingTop: normalize(5) }} ><Text style={styles.skills} key={`skills_${index}`}>{item}</Text></View>
+                                        <View style={{ width: normalize(100), marginLeft: normalize(5), paddingTop: normalize(5) }} key={`skills_${index}`}><Text style={styles.skills} >{item}</Text></View>
                                     )
                                 })
                                 }
@@ -331,7 +347,7 @@ class ServiceDetail extends React.Component {
                                 keyExtractor={(items, index) => index.toString()}
                                 renderItem={({ item, index }) => (
                                     <View>
-                                        {item ? <Text style={styles.includedText} > <Image source={require('../../assets/img/green_tick.png')} style={{ width: 18, height: 18 }} />  {item}</Text>
+                                        {item ? <Text style={styles.includedText} key={`feature_${index}`}> <Image source={require('../../assets/img/green_tick.png')} style={{ width: 18, height: 18 }} />  {item}</Text>
                                             :
                                             null
                                         }
@@ -345,7 +361,7 @@ class ServiceDetail extends React.Component {
                                 keyExtractor={(items, index) => index.toString()}
                                 renderItem={({ item, index }) => (
                                     <View>
-                                        {item ? <Text style={styles.includedText} > <Image source={require('../../assets/img/green_tick.png')} style={{ width: 18, height: 18 }} />  {item}</Text>
+                                        {item ? <Text style={styles.includedText} key={`SS_${index}`}> <Image source={require('../../assets/img/green_tick.png')} style={{ width: 18, height: 18 }} />  {item}</Text>
                                             :
                                             null
                                         }
@@ -411,7 +427,7 @@ class ServiceDetail extends React.Component {
                             data={this.state.service.user_data}
                             keyExtractor={(items, index) => index.toString()}
                             renderItem={({ item, index }) => (
-                                <View style={styles.sectionContainer}>
+                                <View style={styles.sectionContainer} key={`users_${index}`}>
                                     <View style={{ flexDirection: 'row', padding: normalize(15) }}>
                                         <View style={{ alignSelf: 'center' }}>
                                             {item.user_profile_pic ?
@@ -422,14 +438,14 @@ class ServiceDetail extends React.Component {
                                         </View>
                                         <View style={{ alignSelf: 'center', paddingLeft: normalize(15) }}>
                                             <View style={{ flexDirection: 'row', }}>
-                                                <Text style={{ fontFamily: 'Poppins-Regular', width: '50%' }}>{item.user_name}</Text>
+                                                <Text style={{ fontFamily: 'Poppins-Regular', width: '50%', fontSize: 13 }}>{item.user_name}</Text>
                                                 <View style={{ flexDirection: 'row', width: '48%', justifyContent: 'flex-end', alignItems: 'flex-end', paddingHorizontal: 10 }}><Image source={require('../../assets/img/star.png')} style={{ width: 20, height: 20 }}></Image><Text>{item.user_rating}</Text></View>
                                             </View>
 
                                             {/* <Text style={{ fontFamily: 'Poppins-Regular' }}>{item.user_lastvisitDate}</Text> */}
                                         </View>
                                     </View>
-                                    <Text style={{ margin: normalize(10), fontFamily: 'Poppins-Regular' }}>{item.user_comment}</Text>
+                                    <Text style={{ margin: normalize(10), fontFamily: 'Poppins-Regular', fontSize: 12 }}>{item.user_comment}</Text>
                                 </View>
                             )}
                         />
