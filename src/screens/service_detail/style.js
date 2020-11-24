@@ -331,34 +331,14 @@ const styles = StyleSheet.create({
         marginHorizontal: normalize(5),
         borderColor: 'gray',
         borderWidth:1,
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        alignItems: "center",
+        justifyContent: "center"
       },
       previewImage: {
-        width: '100%',
-        height: '100%'
+        width: '80%',
+        height: '80%'
       },
-
-      sellerBtnBox: {
-        flex: 1,
-        alignItems: 'center',
-        padding : normalize(5)
-        //justifyContent: 'flex-end'.
-      },
-      sellerBtn: {
-        alignItems:'center',
-        width:normalize(60),
-        borderRadius:3,
-        padding: normalize(2),
-        backgroundColor: '#427BEC'
-      },
-      sellerBtnText: {
-        color: '#ffffff',
-        fontSize: normalize(8),
-        textAlign:'center',
-        padding : normalize(2),
-       // textTransform: 'uppercase',
-        fontFamily:'Poppins-Bold'
-      }
 
 })
 

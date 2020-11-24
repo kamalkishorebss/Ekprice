@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Dimensions, TextInput, ImageBackground, Image } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Video from 'react-native-video';
-import firebase from "react-native-firebase";
+//import firebase from "react-native-firebase";
 
 
 export default class Splash extends React.Component {
@@ -12,7 +12,7 @@ export default class Splash extends React.Component {
 	}
 
 	UNSAFE_componentWillMount = () => {
-		this.createNotificationListeners()
+		//this.createNotificationListeners()
 		setTimeout(() => {
 			this.setToggle();
 			this.props.navigation.navigate("Home");
@@ -41,43 +41,43 @@ export default class Splash extends React.Component {
 
 
 
-	async createNotificationListeners() {
-		//alert('1')
+	// async createNotificationListeners() {
+	// 	//alert('1')
 
-		// This listener triggered when notification has been received in foreground
-		this.notificationListener = firebase.notifications().onNotification((notification) => {
-			const { title, body } = notification;
-			//alert('2')
-		  this.displayNotification(title, body);
-		});
+	// 	// This listener triggered when notification has been received in foreground
+	// 	this.notificationListener = firebase.notifications().onNotification((notification) => {
+	// 		const { title, body } = notification;
+	// 		//alert('2')
+	// 	  this.displayNotification(title, body);
+	// 	});
 	
-		// This listener triggered when app is in backgound and we click, tapped and opened notifiaction
-		this.notificationOpenedListener = firebase.notifications().onNotificationOpened((notificationOpen) => {
-			const { title, body } = notificationOpen.notification;
-			//alert('3')
-		  this.displayNotification(title, body);
-		});
+	// 	// This listener triggered when app is in backgound and we click, tapped and opened notifiaction
+	// 	this.notificationOpenedListener = firebase.notifications().onNotificationOpened((notificationOpen) => {
+	// 		const { title, body } = notificationOpen.notification;
+	// 		//alert('3')
+	// 	  this.displayNotification(title, body);
+	// 	});
 	
-		// This listener triggered when app is closed and we click,tapped and opened notification 
-		const notificationOpen = await firebase.notifications().getInitialNotification();
-		if (notificationOpen) {
-			//alert('4')
-		  const { title, body } = notificationOpen.notification;
-		  this.displayNotification(title, body);
-		}
-	  }
+	// 	// This listener triggered when app is closed and we click,tapped and opened notification 
+	// 	const notificationOpen = await firebase.notifications().getInitialNotification();
+	// 	if (notificationOpen) {
+	// 		//alert('4')
+	// 	  const { title, body } = notificationOpen.notification;
+	// 	  this.displayNotification(title, body);
+	// 	}
+	//   }
 	
 	
-	  displayNotification(title, body) {
-		// we display notification in alert box with title and body
-		// Alert.alert(
-		//   title, body,
-		//   [
-		// 	{ text: 'Ok', onPress: () => console.log('ok pressed') },
-		//   ],
-		//   { cancelable: false },
-		// );
-	  }
+	//   displayNotification(title, body) {
+	// 	// we display notification in alert box with title and body
+	// 	// Alert.alert(
+	// 	//   title, body,
+	// 	//   [
+	// 	// 	{ text: 'Ok', onPress: () => console.log('ok pressed') },
+	// 	//   ],
+	// 	//   { cancelable: false },
+	// 	// );
+	//   }
 	
 
 	render() {

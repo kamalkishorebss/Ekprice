@@ -31,27 +31,22 @@ import {
       width: width,
       paddingTop: normalize(15)
     },
-    imageWrapper:{
-        width:'20%',
-        justifyContent:'flex-start',
-        alignItems:'flex-start' 
-    },
     messageWrapper:{
+        paddingLeft: 20,
         width:'80%',
         alignItems:'flex-start'
     },
     userImage:{
-      width : (width / 7) -10,
-      height:(width / 7) -10,
+      width : (width / 6) -10,
+      height:(width / 6) -10,
       borderRadius:50 ,
-      alignItems:'flex-start',
-      paddingLeft:normalize(5) 
+      alignItems:'flex-start', 
     },
     catItem: {
         width: width,
         backgroundColor: '#fff',
-        padding:15,
-        borderColor:'#CED3DB',
+        padding:10,
+        borderColor:'#f7f7f7',
         borderWidth:.5,
         flexDirection:'row'
       },
@@ -64,22 +59,18 @@ import {
         padding:normalize(3),
     },
     userNameText:{
-      flex:.5,
       color: '#212121',
       fontSize: normalize(12),
       fontFamily:'Poppins-Medium',
-      //marginHorizontal: normalize(5),
-      //fontWeight:'bold',
-      padding:normalize(3),
       textAlign:'left'
     },
     timingText:{
-      flex:.5,
       color: '#767676',
-      fontSize: normalize(10),
+      fontSize: normalize(12),
       fontFamily:'Poppins-Regular',
       padding:normalize(3),
-      textAlign:'right'
+      textAlign:'right',
+      color: 'darkgray'
     }
    
     

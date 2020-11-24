@@ -6,12 +6,13 @@ import Toast, { DURATION } from 'react-native-easy-toast'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import firebase, { Notification, NotificationOpen } from 'react-native-firebase';
+//import firebase, { Notification, NotificationOpen } from 'react-native-firebase';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Dialog, { SlideAnimation, DialogContent } from 'react-native-popup-dialog';
 const { width } = Dimensions.get('window')
 import AsyncStorage from '@react-native-community/async-storage';
 //import ConfirmGoogleCaptcha from 'react-native-google-recaptcha-v2';
+import messaging from '@react-native-firebase/messaging';
 
 import {
 	allActions

@@ -196,11 +196,11 @@ dependencies {
     //noinspection GradleDynamicVersion
     
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
-    implementation "com.google.firebase:firebase-messaging:20.1.5"
-    implementation "com.google.android.gms:play-services-base:17.2.1"
-    implementation "com.google.firebase:firebase-core:16.0.8"
+    // implementation "com.google.firebase:firebase-messaging:20.1.5"
+    // implementation "com.google.android.gms:play-services-base:17.2.1"
+    // implementation "com.google.firebase:firebase-core:16.0.8"
     implementation "com.facebook.react:react-native:+"  // From node_modules
-
+    implementation 'androidx.multidex:multidex:2.0.1'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
@@ -225,7 +225,10 @@ dependencies {
 }
 
 android {
-    
+     lintOptions { 
+        checkReleaseBuilds false // Add this
+        abortOnError false
+    }
     defaultConfig { 
          multiDexEnabled true 
      }

@@ -45,6 +45,8 @@ import SearchPage from './src/screens/search/index';
 import ApprovalPage from './src/screens/approval/index';
 import VideoPlay from './src/screens/videoPlayer/index';
 //import ChatScreen from './src/screens/chatscreen';
+import ChatScreen from './src/screens/chatscreen';
+import MessageIcon from './MessageIcon';
 
 const { width } = Dimensions.get('window')
 const initialRoute = {
@@ -210,7 +212,7 @@ const AppNavigator = createStackNavigator({
   SearchPage    :      {screen : SearchPage},
   ApprovalPage  :      {screen : ApprovalPage},
   VideoPlay     :      {screen : VideoPlay},
-  //ChatScreen    :      {screen: ChatScreen},
+  ChatScreen    :      {screen : ChatScreen},
   ...editService,
   ...ms,
   ...addService

@@ -21,7 +21,13 @@ const initState = {
   searchItem: '',
   getNN: '',
   genrateOrd: '',
-  createOrd: ''
+  createOrd: '',
+  conversations:[],
+  receiverId:'',
+  receiverName: '',
+  receiverPic:'',
+  unreadMessageCount: [],
+  unreadCount: 0
 
 }
 
@@ -30,7 +36,45 @@ const common = (state = initState, action) => {
   const { type, payload } = action
 
   switch (type) {
+    case 'addUnreadCount': {
+      var senderCount = state.unreadMessageCount.find(item => item.receiverId === payload)
+      console.log('senderCount up', senderCount)
+      if(senderCount){
+        senderCount.count = senderCount.count + 1
+      }else{
+        senderCount = {
+          receiverId: payload,
+          count: 1
+        }
+      }
+      return { ...state, unreadMessageCount: [...state.unreadMessageCount.filter(item => item.receiverId !== payload), senderCount] }
+    }
+    case 'addAllUnreadCount': {
+      return { ...state, unreadCount: state.unreadCount + 1 }
+    }
+    case 'resetAllUnreadCount': {
+      return { ...state, unreadCount: 0 }
+    }
+    case 'resetUnreadCount': {
+      return { ...state, unreadMessageCount: [...state.unreadMessageCount.filter(item => item.receiverId !== payload)] }
+    }
 
+    case 'setRecieverId': {
+      return { ...state, receiverId: action.payload, receiverName: action.receiverName, receiverPic: action.receiverPic }
+    }
+
+    case 'sortConversation': 
+      return { ...state, conversations: [ payload,  ...state.conversations.filter(item=> item.receiver_id !== payload.receiver_id)]}
+
+    case 'fetchConversationFulfiled': {
+      return { ...state, conversations: action.payload.data }
+    }
+
+    case 'fetchConversationRejected': {
+      return { ...state, error: action.payload.error, conversations:[], }
+    }
+
+    
     case "FETCH_LOGIN_REJECTED": {
       return { ...state, is_authed: false, error: action.payload }
       break;

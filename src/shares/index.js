@@ -7,6 +7,7 @@ import RunningOrders from './running_orders/index';
 import AddedServices from './services/index';
 import Micro_Jobs from './micro_jobs/index';
 import Customer_Reviews from './customer_reviews/index';
+import NewHeader from './NewHeader';
 export {
   Header,
   ProductHeader,
@@ -16,5 +17,6 @@ export {
   RunningOrders,
   AddedServices,
   Micro_Jobs,
-  Customer_Reviews
+  Customer_Reviews,
+  NewHeader
 }

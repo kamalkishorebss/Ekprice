@@ -99,6 +99,17 @@ export const commonConstant = {
     FETCH_PlaceOrder_REJECTED   : "FETCH_PlaceOrder_REJECTED",
     FETCH_PlaceOrder_FULFILLED  : "FETCH_PlaceOrder_FULFILLED",
 
+    fetchConversationRejected : 'fetchConversationRejected',
+    fetchConversationFulfiled : 'fetchConversationFulfiled',
+    
+    setRecieverId : 'setRecieverId',
+    
+    addUnreadCount  : 'addUnreadCount',
+    resetUnreadCount: 'resetUnreadCount',
+    sortConversation: 'sortConversation',
+
+    resetAllUnreadCount: 'resetAllUnreadCount',
+    addAllUnreadCount: 'addAllUnreadCount',
     
     
     

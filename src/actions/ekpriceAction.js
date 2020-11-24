@@ -406,30 +406,7 @@ export const getServiceDetail = (id) => {
    }
 }
 
-export const get_Messages = (id) => {
-    console.log(`https://www.ekprice.com/api/getmessage/70753`)
-    return (dispatch) => {
-       return axios.get(`https://www.ekprice.com/api/getmessage/70753`)
-        .then(data => {
-            //console.log(data.data)
-            
-           dispatch({
-                 type: type.FETCH_Messages_FULFILLED,
-                 payload: data.data})
-                 return data.data
-            })
-            .catch((err) => {
-                //console.log(JSON.stringify(err))
-                dispatch({
-                    type: type.FETCH_Messages_REJECTED,
-                    payload: err,
-                    
-                })
-               return err 
-                
-            })
-    }
-}
+
 
 
 
@@ -849,6 +826,108 @@ export const placeOrder = (user_id,usertype) => {
                return err 
                 
             })
+    }
+}
+
+
+export const getConversation = (user_id, userType) => {
+    console.log('`${API_URL}${userType}/${user_id}`', `${API_URL}${userType}/${user_id}`)
+    return (dispatch) => {
+       return axios.get(`${API_URL}${userType}/${user_id}`)
+        .then(data => {
+            //console.log(data.data)
+           dispatch({
+                 type: type.fetchConversationFulfiled,
+                 payload: data.data})
+            })
+            .catch((err) => {
+                //console.log(JSON.stringify(err))
+                dispatch({
+                    type: type.fetchConversationRejected,
+                    payload: err,
+                    
+                })
+               return err 
+                
+            })
+    }
+}
+
+export const addMessage = (messageData) => {
+    const { sender_id, receiver_id, message, email_message_flag, file, usertype } = messageData
+    let formData = new FormData();
+    formData.append('sender_id', sender_id)
+    formData.append('receiver_id', receiver_id)
+    formData.append('message', message)
+    formData.append('email_message_flag', email_message_flag)
+    formData.append('usertype', usertype)
+    return (dispatch) => {
+       return axios({
+           method: 'POST',
+           url: `${API_URL}messages/store/db`,
+           data: formData,
+           headers: {'Content-Type': 'multipart/form-data' }
+       })
+        .then(message => {
+           console.log('data after messgae create', message)
+        })
+        .catch((err) => {
+            console.log('Error in messgae create', err)
+        })
+    }
+}
+
+export const setReceiverId = (receiverId, receiverName, receiverPic) => {
+    return (dispatch) => {
+       return dispatch({
+            type: type.setRecieverId,
+            payload: receiverId,
+            receiverName: receiverName,
+            receiverPic: receiverPic
+       })
+    }
+}
+
+
+export const addUnreadCount = (receiverId) => {
+    return (dispatch) => {
+        return dispatch({
+            type: type.addUnreadCount,
+            payload: receiverId
+        })
+    }
+}
+
+export const resetUnreadCount = (receiverId) => {
+    return (dispatch) => {
+        return dispatch({
+            type: type.resetUnreadCount,
+            payload: receiverId
+        })
+    }
+}
+
+export const sortConversation = (payload) => {
+    return (dispatch) => {
+        return dispatch({
+            type: type.sortConversation,
+            payload
+        })
+    }
+}
+
+export const resetTotalUnreadMessage = () => {
+    return (dispatch) => {
+        return dispatch({
+            type: type.resetAllUnreadCount
+        })
+    }
+}
+export const addTotalUnreadMessage = () => {
+    return (dispatch) => {
+        return dispatch({
+            type: type.addAllUnreadCount
+        })
     }
 }
 

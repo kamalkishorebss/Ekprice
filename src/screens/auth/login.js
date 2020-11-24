@@ -6,7 +6,6 @@ import Toast, { DURATION } from 'react-native-easy-toast';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import firebase, { Notification, NotificationOpen } from 'react-native-firebase';
 import { AccessToken, LoginManager, LoginButton } from 'react-native-fbsdk';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -18,6 +17,8 @@ import {
 import { allActions } from '../../actions';
 const { width } = Dimensions.get('window');
 import AsyncStorage from '@react-native-community/async-storage';
+import messaging from '@react-native-firebase/messaging';
+import firestore from '@react-native-firebase/firestore';
 
 const mapDispatchToProps = (dispatch) => {
 	return ({
@@ -64,6 +65,14 @@ class Login extends React.Component {
 				console.log(res);
 				//this.setState({ refreshering: true });
 				if (res.status == true) {
+					const userFireStoreReference = firestore().collection('Users')
+					userFireStoreReference.doc(`${res.data.user_id}`).update({
+						isOnline: true
+					}).then((res) => {
+						console.log('response', res)
+					}).catch((error) => {
+						console.log('Error', error)
+					})
 					this.setState({ refreshering: false });
 					this.saveKey(res.data);
 					this.saveToken(res.data.user_id);
